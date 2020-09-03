@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- BFC
+块级格式化上下文，是一个独立的渲染区域，让处于 BFC 内部的元素与外部的元素相互隔离，使内外元素的定位不会相互影响。
+属于同一个 BFC 的两个相邻 Box 垂直排列
+属于同一个 BFC 的两个相邻 Box 的 margin 会发生重叠
+BFC 中子元素的 margin box 的左边， 与包含块 (BFC) border box的左边相接触 (子元素 absolute 除外)
+BFC 的区域不会与 float 的元素区域重叠
+计算 BFC 的高度时，浮动子元素也参与计算
+文字层不会被浮动层覆盖，环绕于周围
+
+如何触发BFC
+满足下列条件之一可触发 BFC
+1. 根元素，即HTML元素
+2. float 的值不为none
+3. overflow 的值不为 visible
+4. display 的值为  inline-block、table-cell、table-caption
+5. position的值为absolute或fixed
+
+应用:
+阻止margin重叠
+可以包含浮动元素 —— 清除内部浮动(清除浮动的原理是两个div都位于同一个 BFC 区域之中)
+自适应两栏布局
+可以阻止元素被浮动元素覆盖 
+-->
+
+<body>
+    <!-- 避免覆盖 -->
+    <div>
+        <div id="test1"></div>
+        <div id="test2"></div>
+    </div>
+    <!-- 取消浮动 计算BFC的高度时，浮动元素也参与计算 -->
+    <div class="float">
+        <div id="test3"></div>
+    </div>
+
+    <!-- 避免 margin 重叠 -->
+    <div class="cover
+    ">
+        <div style="overflow: hidden;">
+            <div id="test4"></div>
+        </div>
+
+        <div style="overflow: hidden;">
+            <div id="test5"></div>
+        </div>
+
+        <div id="test5" style="overflow: hidden;"></div>
+    </div>
+
+    <!-- 三栏自适应  BFC的区域不会与float box重叠-->
+    <div class="container">
+        <div class="test6"></div>
+        <div class="test8"></div>
+        <div class="test7"></div>
+    </div>
+
+    <div class="container">
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="main"></div>
+    </div>
+</body>
+
+</html>
+<style>
+    #test1 {
+        height: 100px;
+        width: 100px;
+        background-color: red;
+        float: left;
+    }
+
+    #test2 {
+        height: 120px;
+        width: 120px;
+        background-color: blue;
+        overflow: hidden;
+    }
+
+    .float {
+        border: 2px solid black;
+        overflow: hidden;
+    }
+    .container {
+        margin-top: 50px;
+    }
+    #test3 {
+        height: 100px;
+        width: 100px;
+        background-color: red;
+        float: right;
+    }
+
+    #test4 {
+        height: 100px;
+        width: 100px;
+        background-color: red;
+        margin: 50px;
+
+    }
+
+    #test5 {
+        height: 100px;
+        width: 100px;
+        background-color: blue;
+        margin: 50px;
+    }
+
+    .cover {
+        /* overflow: hidden; */
+        border: 2px solid black;
+    }
+
+    .test6 {
+        height: 100px;
+        width: 100px;
+        background-color: red;
+        float: left;
+    }
+
+    .test7 {
+        height: 100px;
+        background-color: blue;
+        /* margin: 50px; */
+        overflow: hidden;
+    }
+
+    .test8 {
+        height: 100px;
+        width: 100px;
+        background-color: green;
+        float: right;
+    }
+    .left {
+	    float: left;
+	    height: 200px;
+	    width: 100px;
+	    margin-right: 20px;
+	    background-color: red;
+	}
+	.right {
+	    width: 200px;
+	    height: 200px;
+	    float: right;
+	    margin-left: 20px;
+	    background-color: blue;
+	}	
+	.main {
+	    height: 200px;
+	    overflow: hidden;
+	    background-color: green;
+	}
+</style>
