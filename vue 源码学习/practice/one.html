@@ -1,0 +1,17 @@
+<html>
+  <div id="app">
+    {{ message }}
+  </div>
+  <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+  <script type="module">
+    // const { createApp } = vue
+   import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+    createApp({
+      data() {
+        return {
+          message: 'i`m back vue1'
+        }
+      }
+    }).mount('#app')
+  </script>
+</html>
