@@ -1,0 +1,19 @@
+<div id="app">
+</div>
+
+<script src="https://unpkg.com/@vue/reactivity@3.2.47/dist/reactivity.global.js">
+</script>
+
+
+<script>
+const { effect, ref } = VueReactivity
+
+function renderer(str, container) {
+  container.innerHTML = str
+}
+const count = ref(1)/*  */
+effect(() => {
+  renderer(`<h1>${count.value}1</h1>`, document.getElementById('app'))
+})
+count.value++
+</script>
